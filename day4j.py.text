@@ -1,0 +1,462 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import keyword\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['False', 'None', 'True', 'and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(keyword.kwlist)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "lis=[1,2,3,4,5,6,7,7,8]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "tup=tuple(lis)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "tuple"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "type(tup)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "k={}"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "dict"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "type(k)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "se=set()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "1.add,2.substract,3.multiply,4.divide2\n",
+      "8 9 8\n",
+      "1\n"
+     ]
+    }
+   ],
+   "source": [
+    "n=input(\"1.add,2.substract,3.multiply,4.divide\")\n",
+    "if n==\"1\":\n",
+    "    l=list(map(int,input().split()))\n",
+    "    k=0\n",
+    "    for i in range(len(l)):\n",
+    "        k+=l[i]\n",
+    "if n==\"2\":\n",
+    "    l=list(map(int,input().split()))\n",
+    "    for i in range(len(l)-1):\n",
+    "        k=l[i]-l[i+1]\n",
+    "if n==\"3\":\n",
+    "    l=list(map(int,input().split()))\n",
+    "    for i in range(len(l)-1):\n",
+    "        k=l[i]*l[i+1]\n",
+    "if n==\"4\":\n",
+    "    print(\"please enter only two values:\")\n",
+    "    l=list(map(int,input().split()))\n",
+    "    for i in range(len(l)-1):\n",
+    "        k=l[i]%l[i+1]\n",
+    "print(k)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "scrolled": false
+   },
+   "outputs": [],
+   "source": [
+    "import requests\n",
+    "import bs4\n",
+    "res=requests.get(\"https://www.amazon.in/Laptops/b/ref=nav_shopall_sbc_mobcomp_laptops?ie=UTF8&node=1375424031\")\n",
+    "Soup=bs4.BeautifulSoup(res.text,\"lxml\")\n",
+    "containers=Soup.findAll('div',{\"class\":\"a-fixed-left-grid-inner\"})\n",
+    "#print(len(containers))\n",
+    "#print(containers)\n",
+    "#print(Soup.prettify())\n",
+    "#print(containers[0])\n",
+    "container=containers[0]\n",
+    "image=container.findAll(\"div\",{\"class\":\"crwProductImage\"})\n",
+    "#print(image[0].text)\n",
+    "price=container.findAll(\"div\",{\"class\":\"currencyINR\"})\n",
+    "#print(price.text)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "Soup=bs4.BeautifulSoup(res.text,\"lxml\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "metadata": {
+    "scrolled": false
+   },
+   "outputs": [],
+   "source": [
+    "find=Soup.find('ul', {'class': 's-result-list s-col-1 s-col-ws-1 s-result-list-hgrid s-height-equalized s-list-view s-text-condensed'})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "metadata": {
+    "scrolled": false
+   },
+   "outputs": [],
+   "source": [
+    "lis=find.find_all('li',{'class':\"s-result-item celwidget \"})"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Apple MacBook Air Core i5 13.3-inch Laptop (8GB/128GB/MacOS Sierra/Silver/1.35kg), MQD32HN/Aby Apple  66,980  77,200You Save:   10,220\n",
+      "        (13%)\n",
+      "    prime \n",
+      "4.5 out of 5 stars\n",
+      "1,250No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotionsCpu Model Family:core i5Display Size:13.3 inchesOperating System:MacOS SierraComputer Memory Size:8.0 GBCpu Model Manufacturer:Intel\n",
+      "HP 15 AMD E2 15.6-inch Entry Level Laptop (4GB /1TB HDD/Windows 10 Home/Jet Black/2.04 Kgs), 15q-bw548AUby HP  20,990  25,808You Save:   4,818\n",
+      "        (18%)\n",
+      "    primeSee newer model of this item\n",
+      "3 out of 5 stars\n",
+      "183No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:amd e seriesDisplay Size:15.6 inchesOperating System:Windows 10 HomeDisplay Resolution Maximum:1366x768Computer Memory Size:4.0 GB\n",
+      "HP 15 Intel Core i5 7th Gen 15.6-inch FHD Laptop (8GB/1TB HDD/Windows 10 Home/Sparkling Black/2.2 kg), bu044TUby HP  41,990  45,980You Save:   3,990\n",
+      "        (8%)\n",
+      "    prime\n",
+      "3.8 out of 5 stars\n",
+      "117No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:core i5 7200uDisplay Size:15.6 inchesOperating System:Windows 10Display Resolution Maximum:1920x1080Computer Memory Size:8.0 GB\n",
+      "HP 14 Core i3 7th gen 14-inch Thin and Light Laptop (4GB /1TB HDD/Windows 10 Home/Smoke Gray /1.59 kg), 14q-cs0006TUby HP  30,990  36,065You Save:   5,075\n",
+      "        (14%)\n",
+      "    prime\n",
+      "3.6 out of 5 stars\n",
+      "165No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:core i3Display Size:14 inchesOperating System:Windows 10 HomeDisplay Resolution Maximum:1366x768Computer Memory Size:4.0 GB\n",
+      "HP 15 Core i3 7th gen 15.6-inch Laptop (4GB/1TB HDD/Windows 10 Home/Natural Silver/2.04 kg), 15-DA0326TUby HP  31,360  35,201You Save:   3,841\n",
+      "        (10%)\n",
+      "    prime\n",
+      "3.2 out of 5 stars\n",
+      "77No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:core i3 7100uDisplay Size:15.6 inchesOperating System:Windows 10 HomeDisplay Resolution Maximum:1920 x 1080 (Full HD)Computer Memory Size:4.0 GB\n",
+      "HP 15 Core i5 8th gen 15.6-inch FHD Laptop (8GB/1TB HDD/DOS/Sparkling Black /2.04 kg), 15q-ds0009TUby HP  41,990  45,889You Save:   3,899\n",
+      "        (8%)\n",
+      "    prime\n",
+      "3.8 out of 5 stars\n",
+      "478No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:core i5 8250uDisplay Size:15.6 inchesOperating System:Free DOS 2.0Display Resolution Maximum:1920x1080Computer Memory Size:8.0 GB\n",
+      "Dell Vostro 3478 Intel Core i3 8th Gen 14-inch Laptop (4GB/1TB HDD/Ubuntu/Black/2.25kg)by Dell  27,990  32,607You Save:   4,617\n",
+      "        (14%)\n",
+      "    prime\n",
+      "3.9 out of 5 stars\n",
+      "124No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:core i3 8130uDisplay Size:14 inchesOperating System:UbuntuDisplay Resolution Maximum:1366x768Computer Memory Size:4.0 GB\n",
+      "Acer Aspire 3 UN.GNVSI.001 15.6-inch Laptop (AMD Dual-Core Processor E2-9000/4GB/1TB/windows 10 Home 64Bit/Integrated Graphics), Obsidian Blackby Acer  17,949  25,999You Save:   8,050\n",
+      "        (30%)\n",
+      "    primeMore Buying Choices  17,699new(9 offers)\n",
+      "2.8 out of 5 stars\n",
+      "18See DetailsUpto 1500 Instant Discount with HDFC EMI See Details Cpu Model Family:amd e seriesDisplay Size:15.6 inchesOperating System:windows 10 Home 64BitDisplay Resolution Maximum:1366x768Computer Memory Size:4.0 GB\n",
+      "Lenovo Ideapad 320 Intel Core i3 6th Gen 14-inch Laptop (4GB/1TB HDD/Windows 10 Home/MS Office/Denim Blue/ 2.2kg), 80XG008NINby Lenovo  26,990  40,290You Save:   13,300\n",
+      "        (33%)\n",
+      "    prime\n",
+      "2.9 out of 5 stars\n",
+      "44No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:core i3Display Size:14 inchesOperating System:Windows 10 HomeComputer Memory Size:4.0 GBCpu Model Manufacturer:Intel\n",
+      "Lenovo Ideapad 330S AMD A9 14-inch Thin and Light Laptop (4GB/1TB HDD/Windows 10 Home/Platinum Grey/ 1.6kg), 81F8001GINby Lenovo  23,990  35,290You Save:   11,300\n",
+      "        (32%)\n",
+      "    prime\n",
+      "3.3 out of 5 stars\n",
+      "189Save ₹ 500.00 with coupon discountNo Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:amd a seriesDisplay Size:14 inchesOperating System:Windows 10Computer Memory Size:4.0 GBCpu Model Manufacturer:AMD\n",
+      "Micromax Lapbook Atom 11.6-inch Laptop (2GB/32GB/Windows 10/Silver/1.3kg), L1161by Micromax  10,490  14,999You Save:   4,509\n",
+      "        (30%)\n",
+      "    prime\n",
+      "3.4 out of 5 stars\n",
+      "187No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:atom z3735Display Size:11.6 inchesOperating System:Windows 10Display Resolution Maximum:1366x768Computer Memory Size:2.0 GB\n",
+      "Lenovo Ideapad 330S Intel Core I3 8th Gen 14 - inch FHD Thin & Light Laptop (4GB/ 1TB HDD/ Windows 10 Home/ Platinum Grey), 81F400GLINby Lenovo  33,279  41,990You Save:   8,711\n",
+      "        (20%)\n",
+      "    prime\n",
+      "3.4 out of 5 stars\n",
+      "51See DetailsUpto 1500 Instant Discount with HDFC EMI See Details Cpu Model Family:core i3 8130uDisplay Size:14 inchesOperating System:Windows 10Display Resolution Maximum:1920x1080Computer Memory Size:4.0 GB\n",
+      "HP Pavilion x360 Intel Core i3 8th Gen 14-inch Touchscreen 2-in-1 FHD Thin and Light Laptop (4GB/1TB+8GB SSHD/Windows 10 Home/MS Office/Natural Silver/1.59 kg), cd0077TUby HP  48,990  53,947You Save:   4,957\n",
+      "        (9%)\n",
+      "    prime\n",
+      "3.4 out of 5 stars\n",
+      "168No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:core i3Display Size:14 inchesOperating System:Windows 10 HomeDisplay Resolution Maximum:1920x1080Computer Memory Size:8.0 GB\n",
+      "Lenovo Ideapad 330 81DE008PIN 15.6-inch Full HD Laptop (8th Gen Core i5-8250U/8GB/1TB/Windows 10/Integrated Graphics), Platinum Grayby Lenovo  42,000  48,890You Save:   6,890\n",
+      "        (14%)\n",
+      "    prime\n",
+      "3.3 out of 5 stars\n",
+      "45No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:core i5 8250uDisplay Size:15.6 inchesOperating System:Windows 10Display Resolution Maximum:1920 x 1080 (Full HD)Computer Memory Size:8.0 GB\n",
+      "Dell Vostro 3568 Intel Core i3 6th Gen 15.6-inch Laptop (4GB/1TB HDD/Windows 10 Home/MS Office/Black/2.18 kg)by Dell  29,999  38,097You Save:   8,098\n",
+      "        (21%)\n",
+      "    primeMore Buying Choices  29,850new(8 offers)\n",
+      "3.3 out of 5 stars\n",
+      "178See DetailsUpto 1500 Instant Discount with HDFC EMI See Details Cpu Model Family:core i3Display Size:15.6 inchesOperating System:WindowsDisplay Resolution Maximum:1366x768Computer Memory Size:4.0 GB\n",
+      "HP 15 Intel Core i3 7th gen 15.6-inch FHD Laptop (4GB/1TB HDD/Windows 10 Home/Sparkling Black /2.04 kg), 15q-ds0006TUby HP  31,990  36,587You Save:   4,597\n",
+      "        (12%)\n",
+      "    prime\n",
+      "3.4 out of 5 stars\n",
+      "94No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:core i3 7100uDisplay Size:15.6 inchesOperating System:Windows 10Display Resolution Maximum:1920x1080Computer Memory Size:4.0 GB\n",
+      "HP 15 15q-bu028TU 2018 15.6-inch Laptop (7th Gen Core i3-7020u/4GB/1TB/Windows 10/Integrated Graphics), Smoke Grayby HP  29,997  34,742You Save:   4,745\n",
+      "        (13%)\n",
+      "    primeOnly 2 left in stock - order soon.\n",
+      "3.5 out of 5 stars\n",
+      "2See DetailsUpto 1500 Instant Discount with HDFC EMI See Details Cpu Model Family:core i3Display Size:15.6 inchesOperating System:Windows 10Display Resolution Maximum:1366 x 768 (HD Ready)Computer Memory Size:4.0 GB\n",
+      "Dell Inspiron 3565 AMD E2 7th Gen 15.6-inch Laptop (4GB/1TB HDD/ Windows 10/Black/2.5kg)by Dell  22,199  29,178You Save:   6,979\n",
+      "        (23%)\n",
+      "    prime\n",
+      "2.5 out of 5 stars\n",
+      "179See DetailsUpto 1500 Instant Discount with HDFC EMI See Details Cpu Model Family:e seriesDisplay Size:15.6 inchesOperating System:Windows 10Display Resolution Maximum:1366x768Computer Memory Size:4.0 GB\n",
+      "Acer Nitro Core i7 8th Gen 15.6-inch Laptop (8GB/1TB/128 GB SSD/Windows 10/4GB Graphics/Black/2.7kg), AN515-52by Acer  74,990  1,06,999You Save:   32,009\n",
+      "        (29%)\n",
+      "    prime More Buying Choices  74,989new(6 offers)\n",
+      "4.4 out of 5 stars\n",
+      "38No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotionsCpu Model Family:core i7Display Size:15.6 inchesOperating System:Windows 10Computer Memory Size:8.0 GBCpu Model Manufacturer:Intel\n",
+      "Lenovo Ideapad 320 Intel Core i3 6th Gen 14-inch Laptop (4GB/1TB HDD/Windows 10 Home/Onyx Black/ 2.2kg), 80XG008MINby Lenovo  26,990  37,290You Save:   10,300\n",
+      "        (27%)\n",
+      "    prime\n",
+      "3 out of 5 stars\n",
+      "286No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:core i3Display Size:14 inchesOperating System:Windows 10 HomeComputer Memory Size:4.0 GBCpu Model Manufacturer:Intel\n",
+      "Lenovo Ideapad 320 Intel Core i3 6th Gen 15.6-inch Laptop (4GB/1TB HDD/DOS/Onyx Black/ 2.2kg/with ODD), 80XH01GEINby Lenovo  26,300  35,390You Save:   9,090\n",
+      "        (25%)\n",
+      "    primeSee newer model of this item\n",
+      "3.6 out of 5 stars\n",
+      "128No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:core i3Display Size:15.6 inchesOperating System:DOSDisplay Resolution Maximum:1366x768Computer Memory Size:4.0 GB\n",
+      "Asus Vivobook X540MA-GQ024T 15.6-inch Laptop (Intel Celeron N4000/4GB/500GB/Windows 10/Integrated Graphics), Chocolate Blackby Asus  18,990  25,990You Save:   7,000\n",
+      "        (26%)\n",
+      "    prime\n",
+      "3.6 out of 5 stars\n",
+      "65No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:celeron nDisplay Size:15.6 inchesOperating System:Windows 10Display Resolution Maximum:1366x768Computer Memory Size:4.0 GB\n",
+      "Dell Inspiron 3567 Intel Core i3 7th Gen 15.6-inch FHD Laptop (4GB/1TB HDD/Windows 10 Home/MS Office/Black/2.5kg)by Dell  31,500  34,990You Save:   3,490\n",
+      "        (9%)\n",
+      "    primeOnly 1 left in stock - order soon.\n",
+      "2.8 out of 5 stars\n",
+      "31See DetailsUpto 1500 Instant Discount with HDFC EMI See Details Cpu Model Family:core i3Display Size:15.5 inchesOperating System:Windows 10Display Resolution Maximum:1920x1080Computer Memory Size:4.0 GB\n",
+      "Dell Vostro 3478 Intel Core i3 8th Gen 14-inch Laptop (4GB/1TB HDD/Windows 10 Home/Black/2.25kg)by Dell  31,990  35,321You Save:   3,331\n",
+      "        (9%)\n",
+      "    prime\n",
+      "3.3 out of 5 stars\n",
+      "84No Cost EMI availableNo Cost EMI availableSee DetailsUpto 1500 Instant Discount with HDFC EMI and 2 more promotions Cpu Model Family:core i3 8130uDisplay Size:14 inchesOperating System:Windows 10Display Resolution Maximum:1366x768Computer Memory Size:4.0 GB\n"
+     ]
+    }
+   ],
+   "source": [
+    "for i in lis:\n",
+    "    print(i.text)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Apple iPhone 7 (Rose Gold, 32 GB) Apple iPhone 7 (Rose Gold, 32 GB)\n",
+      "₹37,999₹52,37027% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1263/monthOffersSpecial Price ₹37,999₹52,37027% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1263/monthOffersSpecial Price\n",
+      "Apple iPhone 6s (Space Grey, 32 GB) Apple iPhone 6s (Space Grey, 32 GB)\n",
+      "₹26,999₹29,9009% offUp to ₹14,900 Off on ExchangeEMI starting from ₹897/monthOffersSpecial Price ₹26,999₹29,9009% offUp to ₹14,900 Off on ExchangeEMI starting from ₹897/monthOffersSpecial Price\n",
+      "Apple iPhone 7 (Gold, 32 GB) Apple iPhone 7 (Gold, 32 GB)\n",
+      "₹37,999₹52,37027% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1263/monthOffersSpecial Price ₹37,999₹52,37027% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1263/monthOffersSpecial Price\n",
+      "Apple iPhone 6s Plus (Rose Gold, 32 GB) Apple iPhone 6s Plus (Rose Gold, 32 GB)\n",
+      "₹33,999₹34,9002% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1130/monthOffersSpecial Price ₹33,999₹34,9002% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1130/monthOffersSpecial Price\n",
+      "Apple iPhone 7 (Silver, 32 GB) Apple iPhone 7 (Silver, 32 GB)\n",
+      "₹37,999₹52,37027% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1263/monthOffersSpecial Price ₹37,999₹52,37027% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1263/monthOffersSpecial Price\n",
+      "Apple iPhone 6s Plus (Gold, 32 GB) Apple iPhone 6s Plus (Gold, 32 GB)\n",
+      "₹33,999₹34,9002% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1130/monthOffersSpecial Price ₹33,999₹34,9002% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1130/monthOffersSpecial Price\n",
+      "Apple iPhone 6s Plus (Space Grey, 32 GB) Apple iPhone 6s Plus (Space Grey, 32 GB)\n",
+      "₹33,999₹34,9002% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1130/monthOffersSpecial Price ₹33,999₹34,9002% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1130/monthOffersSpecial Price\n",
+      "Apple iPhone SE (Rose Gold, 32 GB) Apple iPhone SE (Rose Gold, 32 GB)\n",
+      "₹16,999₹26,00034% offUp to ₹14,900 Off on ExchangeEMI starting from ₹565/monthOffersSpecial Price ₹16,999₹26,00034% offUp to ₹14,900 Off on ExchangeEMI starting from ₹565/monthOffersSpecial Price\n",
+      "Apple iPhone 6s (Silver, 32 GB) Apple iPhone 6s (Silver, 32 GB)\n",
+      "₹26,999₹29,9009% offUp to ₹14,900 Off on ExchangeEMI starting from ₹897/monthOffersSpecial Price ₹26,999₹29,9009% offUp to ₹14,900 Off on ExchangeEMI starting from ₹897/monthOffersSpecial Price\n",
+      "Apple iPhone SE (Gold, 32 GB) Apple iPhone SE (Gold, 32 GB)\n",
+      "₹16,999₹26,00034% offUp to ₹14,900 Off on ExchangeEMI starting from ₹565/monthOffersSpecial Price ₹16,999₹26,00034% offUp to ₹14,900 Off on ExchangeEMI starting from ₹565/monthOffersSpecial Price\n",
+      "Apple iPhone 6s (Rose Gold, 32 GB) Apple iPhone 6s (Rose Gold, 32 GB)\n",
+      "₹26,999₹29,9009% offUp to ₹14,900 Off on ExchangeEMI starting from ₹897/monthOffersSpecial Price ₹26,999₹29,9009% offUp to ₹14,900 Off on ExchangeEMI starting from ₹897/monthOffersSpecial Price\n",
+      "Apple iPhone SE (Space Grey, 32 GB) Apple iPhone SE (Space Grey, 32 GB)\n",
+      "₹17,999₹26,00030% offUp to ₹14,900 Off on ExchangeEMI starting from ₹598/monthOffersSpecial Price ₹17,999₹26,00030% offUp to ₹14,900 Off on ExchangeEMI starting from ₹598/monthOffersSpecial Price\n",
+      "Apple iPhone 6 (Space Grey, 32 GB) Apple iPhone 6 (Space Grey, 32 GB)\n",
+      "₹22,999₹30,78025% offUp to ₹14,900 Off on ExchangeEMI starting from ₹764/monthOffersSpecial Price ₹22,999₹30,78025% offUp to ₹14,900 Off on ExchangeEMI starting from ₹764/monthOffersSpecial Price\n",
+      "Apple iPhone 6s Plus (Silver, 32 GB) Apple iPhone 6s Plus (Silver, 32 GB)\n",
+      "₹33,999₹34,9002% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1130/monthOffersSpecial Price ₹33,999₹34,9002% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1130/monthOffersSpecial Price\n",
+      "Apple iPhone 6 (Gold, 32 GB) Apple iPhone 6 (Gold, 32 GB)\n",
+      "₹22,999₹30,78025% offUp to ₹14,900 Off on ExchangeEMI starting from ₹764/monthOffersSpecial Price ₹22,999₹30,78025% offUp to ₹14,900 Off on ExchangeEMI starting from ₹764/monthOffersSpecial Price\n",
+      "Apple iPhone 6s (Gold, 32 GB) Apple iPhone 6s (Gold, 32 GB)\n",
+      "₹26,999₹29,9009% offUp to ₹14,900 Off on ExchangeEMI starting from ₹897/monthOffersSpecial Price ₹26,999₹29,9009% offUp to ₹14,900 Off on ExchangeEMI starting from ₹897/monthOffersSpecial Price\n",
+      "Apple iPhone SE (Silver, 32 GB) Apple iPhone SE (Silver, 32 GB)\n",
+      "₹17,999₹26,00030% offUp to ₹14,900 Off on ExchangeEMI starting from ₹598/monthOffersSpecial Price ₹17,999₹26,00030% offUp to ₹14,900 Off on ExchangeEMI starting from ₹598/monthOffersSpecial Price\n",
+      "Apple iPhone 7 (Black, 32 GB) Apple iPhone 7 (Black, 32 GB)\n",
+      "₹37,999₹52,37027% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1263/monthOffersSpecial Price ₹37,999₹52,37027% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1263/monthOffersSpecial Price\n",
+      "Apple iPhone 7 Plus (Black, 32 GB) Apple iPhone 7 Plus (Black, 32 GB)\n",
+      "₹49,899EMI starting from ₹1658/month ₹49,899EMI starting from ₹1658/month\n",
+      "Apple iPhone XS Max (Gold, 64 GB) Apple iPhone XS Max (Gold, 64 GB)\n",
+      "₹1,09,900Up to ₹14,900 Off on ExchangeEMI starting from ₹3651/month ₹1,09,900Up to ₹14,900 Off on ExchangeEMI starting from ₹3651/month\n",
+      "Apple iPhone 8 Plus (Gold, 64 GB) Apple iPhone 8 Plus (Gold, 64 GB)\n",
+      "₹68,999₹77,56011% offUp to ₹14,900 Off on ExchangeEMI starting from ₹2292/monthOffersSpecial Price ₹68,999₹77,56011% offUp to ₹14,900 Off on ExchangeEMI starting from ₹2292/monthOffersSpecial Price\n",
+      "Apple iPhone 8 (Silver, 64 GB) Apple iPhone 8 (Silver, 64 GB)\n",
+      "₹58,999₹67,94013% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1960/monthOffersSpecial Price ₹58,999₹67,94013% offUp to ₹14,900 Off on ExchangeEMI starting from ₹1960/monthOffersSpecial Price\n",
+      "Apple iPhone 7 Plus (Rose Gold, 32 GB) Apple iPhone 7 Plus (Rose Gold, 32 GB)\n",
+      "₹49,899EMI starting from ₹1658/month ₹49,899EMI starting from ₹1658/month\n",
+      "Apple iPhone XS (Space Grey, 256 GB) Apple iPhone XS (Space Grey, 256 GB)\n",
+      "₹1,14,900Up to ₹14,900 Off on ExchangeEMI starting from ₹3817/month ₹1,14,900Up to ₹14,900 Off on ExchangeEMI starting from ₹3817/month\n"
+     ]
+    }
+   ],
+   "source": [
+    "import bs4\n",
+    "import requests\n",
+    "uclient=requests.get(\"https://www.flipkart.com/search?q=iphones&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off\")\n",
+    "page_soup=bs4.BeautifulSoup(uclient.text,\"html.parser\")\n",
+    "#containers=page_soup.findAll('div',{\"class\":\"_3O0U0u\"})\n",
+    "#print(len(containers))\n",
+    "#print(page_soup.prettify())\n",
+    "container=containers[0]\n",
+    "#print(container.div.img[\"alt\"])\n",
+    "#price=container.findAll(\"div\",{\"col col-5-12 _2o7WAb\"})\n",
+    "#print(price[0].text)\n",
+    "filename=\"products.csv\"\n",
+    "f=open(filename,\"w\")\n",
+    "headers=\"product_name,pricing\\n\"\n",
+    "f.write(headers)\n",
+    "for container in containers:\n",
+    "    product_name=container.div.img[\"alt\"]\n",
+    "    price_container=container.findAll(\"div\",{\"col col-5-12 _2o7WAb\"})\n",
+    "    price=price_container[0].text.strip()\n",
+    "    print(product_name,product_name)\n",
+    "    print(price,price)\n",
+    "    trim_price=\"\".join(price.split(','))\n",
+    "    split_price=\"\".join(trim_price.split(\"E\"))\n",
+    "    final_price=split_price[0]\n",
+    "    #print(product_name.replace(\",\",\"|\")+\",\"+final_price.replace +\"\\n\")\n",
+    "    #f.write(product_name.replace(\",\",\"|\")+\",\"+final_price.replace+\"\\n\")\n",
+    "f.close()\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
